@@ -19,13 +19,7 @@ def r_type(op,operands):
     funct3 = int(instructions[op]['funct3'],2)
     funct7 = int(instructions[op]['funct7'],2)
 
-    instr = instr | opcode 
-    instr = instr | (rd<<7) 
-    instr = instr | (funct3<<12)
-    instr = instr | (rs1<<15)
-    instr = instr | (rs2<<20)
-    instr = instr | (funct7<<25)
-    print(bin(instr))
+    instr = instr | opcode | (rd<<7) | (funct3<<12) | (rs1<<15) | (rs2<<20) | (funct7<<25)
     return f"{instr:#010x}"
 
 def i_type(op,operands):
@@ -74,9 +68,32 @@ def lw(op,operands):
     return  f"{instr:#010x}"
     
 
+def b_type(op, operands):
+    instr = 0
+    opcode = int(instructions[op]['op'],2)
+    funct3 = int(instructions[op]['funct3'],2)
+    rs1 = registers[operands[0]]
+    rs2 = registers[operands[1]]
+    imm:str = operands[2]
+    if imm.isalnum():
+        imm=int(imm,16)
+    else:
+        imm=int(imm)
 
+    #magic
+    imm_4_1 = imm & (int(b'1111',2)<<1)
+    
+    imm_11 = (imm & (1<<11))>>11
+   
+    imm_11_7 = imm_4_1 | imm_11
+    
+    imm_10_5 = imm & (int(b'111111',2)<<5)
+    
+    imm_12 = (imm & (1<<12))>>12
+    
+    imm_31_25 = imm_10_5 | (imm_12<<1)
+    
+    instr = opcode | (imm_11_7<<7) | (funct3<<12) | (rs1<<15) | (rs2<<20) | (imm_31_25<<25)
 
-
-
-
+    return f"{instr:#010x}"
 

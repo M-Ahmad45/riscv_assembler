@@ -19,4 +19,7 @@ instructions = {
     'andi':{'type':'I','op':b'0010011','funct3':b'111'},
     'slti':{'type':'I','op':b'0010011','funct3':b'010'},
     'lw'  :{'type':'I','op':b'0000011','funct3':b'010'},
+
+    'beq':{'type':'B','op':b'1100011','funct3':b'000'},
+    'bne':{'type':'B','op':b'1100011','funct3':b'001'}
 }
