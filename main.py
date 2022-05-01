@@ -18,4 +18,4 @@ else:
                 instr =  i_type(op,operands)
             elif instr_type=="B":
                 instr = b_type(op,operands)
-        out.write(instr+"\n")
+            out.write(instr+"\n")
