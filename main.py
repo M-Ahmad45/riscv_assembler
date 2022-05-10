@@ -1,5 +1,5 @@
 from riscv import instructions
-from _parser import get_tokens, i_type, r_type, b_type
+from _parser import get_tokens, i_type, r_type, b_type, flip_space
 import sys
 
 if len(sys.argv)<3: #one arg is main.py
@@ -18,4 +18,4 @@ else:
                 instr =  i_type(op,operands)
             elif instr_type=="B":
                 instr = b_type(op,operands)
-            out.write(instr+"\n")
+            out.write(flip_space(instr)+"\n")

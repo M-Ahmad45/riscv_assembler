@@ -97,3 +97,10 @@ def b_type(op, operands):
 
     return f"{instr:#010x}"
 
+def flip_space(instr:str):
+    out = instr[2:]
+    out  = ([out[i]+out[i+1]+" " for i in range(0,len(out)-1,2)])
+    out = out[::-1]
+    out = "".join(out)
+    out = out.strip()
+    return out
