@@ -77,9 +77,10 @@ def b_type(op, operands):
     imm:str = operands[2]
     if imm.isalnum():
         imm=int(imm,16)
+        
     else:
         imm=int(imm)
-
+    imm = imm & int(b'1111_1111_111')
     #magic
     imm_4_1 = imm & (int(b'1111',2)<<1)
     
