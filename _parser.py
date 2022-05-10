@@ -29,10 +29,12 @@ def i_type(op,operands):
     rd = registers[operands[0]]
     rs1 = registers[operands[1]]
     imm:str = operands[2]
-    if imm.isalnum():
+
+    if imm.find('x')!=-1:
         imm=int(imm,16)
     else:
         imm=int(imm)
+
     opcode = int(instructions[op]['op'],2)
     funct3 = int(instructions[op]['funct3'],2)
 
@@ -45,7 +47,7 @@ def get_offset_imm(operand:str):
     while operand[i]!=' ' and operand[i]!='(':
         imm+=operand[i]
         i+=1
-    if imm.isalnum():
+    if imm.find('x')!=-1:
         imm=int(imm,16)
     else:
         imm=int(imm)
@@ -75,7 +77,7 @@ def b_type(op, operands):
     rs1 = registers[operands[0]]
     rs2 = registers[operands[1]]
     imm:str = operands[2]
-    if imm.isalnum():
+    if imm.find('x')!=-1:
         imm=int(imm,16)
         
     else:
