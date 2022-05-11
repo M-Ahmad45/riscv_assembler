@@ -84,7 +84,6 @@ def b_type(op, operands):
         imm=int(imm)
   
     imm = imm & int(b'1111_1111_1111_1',2) #imm is a 13 bit number
-    #print(bin(imm))
     #magic
     imm_4_1 = imm & (int(b'1111',2)<<1)
     imm_11 = (imm & (1<<11))>>11
@@ -94,11 +93,10 @@ def b_type(op, operands):
     imm_10_5 = (imm & (int(b'111111',2)<<5))>>5
    
     imm_12 = (imm & (1<<12))>>12
-    print(imm_12)
+    
     imm_31_25 = imm_10_5 | (imm_12<<6)
-    print(bin(imm_31_25))
     instr = opcode | (imm_11_7<<7) | (funct3<<12) | (rs1<<15) | (rs2<<20) | (imm_31_25<<25)
-    #print("instr",bin(instr))
+
     return f"{instr:#010x}"
 
 def flip_space(instr:str):
